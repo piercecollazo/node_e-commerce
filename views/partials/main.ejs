@@ -1,0 +1,55 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <form class="form-inline my-2 my-lg-0" method="POST" >
+    <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" aria-label="Search" name="keySearch">
+  </form>
+</div>
+<% if(user){ %>
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <% for(let i = 0; i < products.length; i++){ %>
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal"><%= products[i].name %></h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">$<%= products[i].price %></small></h1>
+            <img class="images" src="<%= products[i].image %>">
+          <a href="/api/product/<%= products[i]._id %>"><button type="button"  class="btn btn-lg btn-block btn-outline-primary">Shop Now</button></a>
+        </div>
+      </div>
+    <% } %>
+
+    <nav aria-label="Page navigation example">
+    <% if (pages > 0) { %>
+      <ul class="pagination text-center">
+          <% if (current == 1) { %>
+              <li class="page-item disabled"><a class="page-link">First</a></li>
+          <% } else { %>
+              <li class="page-item"><a class="page-link" href="/page/1">First</a></li>
+          <% } %>
+          <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+          <% if (i !== 1) { %>
+              <li class="page-item disabled"><a class="page-link">...</a></li>
+          <% } %>
+          <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+              <% if (i == current) { %>
+                  <li class="page-item active"><a class="page-link"><%= i %></a></li>
+              <% } else { %>
+                  <li><a class="page-link" href="/page/<%= i %>"><%= i %></a></li>
+              <% } %>
+              <% if (i == Number(current) + 4 && i < pages) { %>
+                  <li class="page-item disabled"><a class="page-link">...</a></li>
+              <% } %>
+          <% } %>
+          <% if (current == pages) { %>
+              <li class="page-item disabled"><a class="page-link">Last</a></li>
+          <% } else { %>
+              <li class="page-item"><a class="page-link" href="/page/<%= pages %>">Last</a></li>
+          <% } %>
+      </ul>
+  <% } %>
+    </nav>
+
+    </div>
+    <% } %>
+  </div>

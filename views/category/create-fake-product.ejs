@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+ <% include ../partials/head %>
+ <body style="padding: 100px;">
+        <% include ../partials/nav %>
+        <% if(success.length > 0){ %>
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <%= success %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+        <% } %>
+
+
+     <ul class="list-group">
+        <% for(let i = 0; i < categories.length; i++){ %>
+         <li class="list-group-item">
+           <a href="/api/admin/create-fake-product/<%= categories[i].name %>/<%= categories[i]._id %>"><%= categories[i].name %></a>
+         </li>
+        <% } %>
+     </ul>
+     <% include ../partials/footer %>
+ </body>
+</html>
